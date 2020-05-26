@@ -1,0 +1,7 @@
+ru:
+  simple_form:
+    labels:
+      employee:
+        first_name: Имя
+        middle_name: Отчество
+        last_name: Фамилия

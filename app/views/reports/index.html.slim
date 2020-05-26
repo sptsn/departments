@@ -1,0 +1,22 @@
+.page-header
+  .pull-right
+  h1 Отчеты
+
+.panel
+  .panel-body
+    = simple_form_for :filter, as: :filter, url: reports_path, method: :get do |f|
+      .row
+        .col-md-6
+          = f.input :date, as: :string, input_html: { class: 'datepicker', value: params.dig(:filter, :date) }, label: false, placeholder: 'Укажите дату, на которую запрашивается информация'
+        .col-md-6
+          => f.button :submit, 'Применить фильтр', class: 'btn btn-primary'
+          = link_to 'Сбросить фильтр', reports_path, class: 'btn btn-default'
+
+- if @departments.present?
+  .row
+    .col-md-6
+      div#tree data-nodes=@treeview.to_json
+
+javascript:
+  $tree = $('#tree');
+  $tree.treeview({data: $tree.data('nodes'), enableLinks: true});

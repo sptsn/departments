@@ -1,0 +1,13 @@
+.row
+  .col-md-12
+    .page-header
+      h1
+        = "Изменение названия #{@department.actual_version.name}"
+.row
+  .col-md-6
+    = simple_form_for :version, as: :version, url: department_update_name_path(@department), html: {class: 'login__form'} do |f|
+      = f.input :name, label: 'Новое название'
+      = f.input :active_since, as: :string, input_html: { class: 'datepicker' }, label: 'Дата, с которой оно изменено'
+
+      => f.button :submit, 'Сохранить', class: 'btn btn-primary'
+      = link_to 'Отмена', departments_path, class: 'btn btn-default'

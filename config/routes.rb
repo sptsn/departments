@@ -1,3 +1,10 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :employees
+  resources :departments, except: :destroy do
+    get :new_name
+    post :update_name
+    get :new_parent
+    post :update_parent
+  end
+  resources :reports, only: :index
 end

@@ -1,0 +1,27 @@
+doctype html
+
+html
+  head
+    title Departments
+
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: :all
+    = csrf_meta_tags
+    = javascript_include_tag 'application'
+
+  body
+    .navbar.navbar-default.navbar-static-top
+      .container
+        .navbar-header
+          = link_to 'Сотрудники', employees_path, class: "navbar-brand"
+          = link_to 'Отделы', departments_path, class: "navbar-brand"
+          = link_to 'Отчеты', reports_path, class: "navbar-brand"
+
+    .container
+      = yield
+
+    = content_for :assets
+    = toastr_flash
+
+javascript:
+  $('.datepicker').datepicker({format: 'yyyy-mm-dd'});

@@ -1,0 +1,26 @@
+.page-header
+  .pull-right
+    = link_to fa_icon('plus'), new_employee_path, class: 'btn btn-success'
+  h1 Сотрудники
+
+- if employees_collection.any?
+  table.table.table-middled
+    thead
+      tr
+        th Имя
+        th Отчество
+        th Фамилия
+        th.text-right
+    tbody
+      - employees_collection.each do |employee|
+        tr
+          td = employee.first_name
+          td = employee.middle_name
+          td = employee.last_name
+          td.text-right
+            => link_to fa_icon('pencil'), edit_employee_path(employee), class: 'btn btn-sm btn-primary'
+            => link_to fa_icon('trash'), employee_path(employee), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Вы уверены?' }
+
+- else
+  center
+    h3.text-muted Сотрудников не найдено

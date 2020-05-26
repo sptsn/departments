@@ -1,0 +1,14 @@
+.row
+  .col-md-6
+    .page-header
+      h1 Редактирование отдела
+
+    = simple_form_for @department, as: :department, url: department_path(@department), html: {class: 'login__form'} do |f|
+      = f.input :formed_at, as: :string, input_html: { class: 'datepicker' }
+      = f.input :disbanded_at, as: :string, input_html: { class: 'datepicker' }
+
+      => f.button :submit, 'Сохранить', class: 'btn btn-primary'
+      = link_to 'Отмена', departments_path, class: 'btn btn-default'
+
+javascript:
+  $('.datepicker').datepicker({format: 'yyyy-mm-dd'});

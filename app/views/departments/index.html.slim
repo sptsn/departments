@@ -1,0 +1,29 @@
+.page-header
+  .pull-right
+    = link_to fa_icon('plus'), new_department_path, class: 'btn btn-success'
+  h1 Отделы
+
+- if departments_collection.any?
+  table.table.table-middled
+    thead
+      tr
+        th Название
+        th Родительский отдел
+        th Дата формирования
+        th Дата расформирования
+        th.text-right
+    tbody
+      - departments_collection.each do |department|
+        tr
+          td = department.actual_version.name
+          td = department.actual_version.parent&.name
+          td = department.formed_at
+          td = department.disbanded_at
+          td.text-right
+            => link_to 'Перенос отдела', department_new_parent_path(department), class: 'btn btn-sm btn-primary'
+            => link_to 'Изменить название', department_new_name_path(department), class: 'btn btn-sm btn-primary'
+            => link_to fa_icon('pencil'), edit_department_path(department), class: 'btn btn-sm btn-primary'
+
+- else
+  center
+    h3.text-muted Отделов не найдено

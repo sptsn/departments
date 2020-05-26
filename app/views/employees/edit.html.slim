@@ -1,0 +1,6 @@
+.row
+  .col-md-6
+    .page-header
+      h1 Редактирование сотрудника
+
+    = render partial: 'employees/shared/form', locals: { employee: resource_employee, url: employee_path(resource_employee) }

@@ -1,0 +1,7 @@
+= simple_form_for employee, as: :employee, url: url, html: { class: 'login__form' } do |f|
+  = f.input :first_name
+  = f.input :middle_name
+  = f.input :last_name
+
+  => f.button :submit, 'Сохранить', class: 'btn btn-primary'
+  = link_to 'Отмена', employees_path, class: 'btn btn-default'

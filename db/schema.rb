@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_200824) do
+ActiveRecord::Schema.define(version: 2020_05_26_065408) do
+
+  create_table "department_versions", force: :cascade do |t|
+    t.integer "department_id"
+    t.string "name"
+    t.string "ancestry"
+    t.datetime "active_since"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.date "formed_at", null: false
     t.date "disbanded_at"
-    t.integer "parent_id"
+    t.string "ancestry"
   end
 
   create_table "employees", force: :cascade do |t|
