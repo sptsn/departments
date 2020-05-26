@@ -1,0 +1,29 @@
+.page-header
+  .pull-right
+    = link_to fa_icon('plus'), new_employment_path, class: 'btn btn-success'
+  h1 Сотрудники в отделах
+
+- if employments_collection.any?
+  table.table.table-middled
+    thead
+      tr
+        th Сотрудник
+        th Отдел
+        th Начало работы
+        th Конец работы
+        th.text-right
+    tbody
+      - employments_collection.each do |employment|
+        tr
+          td = employment.employee.name
+          td = employment.department.name
+          td = employment.start_date
+          td = employment.end_date
+          td.text-right
+            / => link_to 'Перенос отдела', department_new_parent_path(employment), class: 'btn btn-sm btn-primary'
+            / => link_to 'Изменить название', department_new_name_path(employment), class: 'btn btn-sm btn-primary'
+            / => link_to fa_icon('pencil'), edit_department_path(employment), class: 'btn btn-sm btn-primary'
+
+- else
+  center
+    h3.text-muted Сотрудников в отделах не найдено

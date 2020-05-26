@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     post :update_parent
   end
   resources :reports, only: :index
+  resources :employments
 end

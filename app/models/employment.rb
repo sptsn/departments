@@ -12,7 +12,7 @@ class Employment < ApplicationRecord
   end
 
   def dates_within_department_dates
-    if start_date < department.formed_at || end_date > department.disbanded_at
+    if start_date < department.formed_at || (department.disbanded_at.present? && end_date > department.disbanded_at)
       errors.add(:start_date, 'Must be within department dates')
     end
   end

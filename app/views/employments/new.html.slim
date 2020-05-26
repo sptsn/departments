@@ -1,0 +1,6 @@
+.row
+  .col-md-6
+    .page-header
+      h1 Трудоустройство сотрудника
+
+    = render partial: 'employments/shared/form', locals: { employment: @employment, url: employments_path }
