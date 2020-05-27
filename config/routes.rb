@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'employees#index'
+
   resources :employees
   resources :departments, except: :destroy do
     get :new_name

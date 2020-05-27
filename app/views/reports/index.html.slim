@@ -9,7 +9,7 @@ link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.cs
     = simple_form_for :filter, as: :filter, url: reports_path, method: :get do |f|
       .row
         .col-md-6
-          = f.input :date, as: :string, input_html: { class: 'datepicker', value: params.dig(:filter, :date) }, label: false, placeholder: 'Укажите дату, на которую запрашивается информация'
+          = f.input :date, as: :string, input_html: { class: 'datepicker', value: params.dig(:filter, :date) || Date.today.strftime('%Y-%m-%d') }, label: false, placeholder: 'Укажите дату, на которую запрашивается информация'
         .col-md-6
           => f.button :submit, 'Применить фильтр', class: 'btn btn-primary'
           = link_to 'Сбросить фильтр', reports_path, class: 'btn btn-default'
@@ -23,11 +23,10 @@ link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.cs
 
 javascript:
   $employeesTable = $('#employeesTable');
-  $employeesTable.hide();
 
-  var url_string = window.location.href;
-  var url = new URL(url_string);
-  var date = url.searchParams.get("filter[date]");
+  url_string = window.location.href;
+  url = new URL(url_string);
+  date = url.searchParams.get("filter[date]");
 
   $tree = $('#tree');
   $tree.treeview({
@@ -35,18 +34,15 @@ javascript:
     levels: 1,
     showTags: true,
     onNodeSelected: function (event, node) {
-        $employeesTable.show();
-        $.ajax({
-                url: '/reports/employees',
-                data: {
-                  department_id: node.data.department_id,
-                  date: date,
-                },
-                success: function (data) {
-                    console.log(data);
-                    $employeesTable.html(data);
-                }
-            }
-        )
+      $.ajax({
+        url: '/reports/employees',
+        data: {
+          department_id: node.data.department_id,
+          date: date,
+        },
+        success: function (data) {
+          $employeesTable.html(data);
+        }
+      })
     }
   });
