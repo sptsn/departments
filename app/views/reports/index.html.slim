@@ -1,3 +1,5 @@
+link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"
+
 .page-header
   .pull-right
   h1 Отчеты
@@ -16,7 +18,35 @@
   .row
     .col-md-6
       div#tree data-nodes=@treeview.to_json
+    .col-md-6
+      div#employeesTable
 
 javascript:
+  $employeesTable = $('#employeesTable');
+  $employeesTable.hide();
+
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var date = url.searchParams.get("filter[date]");
+
   $tree = $('#tree');
-  $tree.treeview({data: $tree.data('nodes'), enableLinks: true});
+  $tree.treeview({
+    data: $tree.data('nodes'),
+    levels: 1,
+    showTags: true,
+    onNodeSelected: function (event, node) {
+        $employeesTable.show();
+        $.ajax({
+                url: '/reports/employees',
+                data: {
+                  department_id: node.data.department_id,
+                  date: date,
+                },
+                success: function (data) {
+                    console.log(data);
+                    $employeesTable.html(data);
+                }
+            }
+        )
+    }
+  });

@@ -68,7 +68,6 @@ source 'https://rails-assets.org' do
   gem "rails-assets-bootstrap-treeview"
 end
 gem 'simple_form'
-# gem 'simple_form_bootstrap'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'rails-i18n'

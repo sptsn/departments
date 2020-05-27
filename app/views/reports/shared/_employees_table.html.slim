@@ -1,0 +1,14 @@
+- if @employments.exists?
+  table.table.table-middled
+    thead
+      tr
+        th ФИО сотрудника
+        th Дата привязки сотрудника к отделу
+    tbody
+      - @employments.each do |employment|
+        tr
+          td = employment.employee.name
+          td = employment.start_date
+- else
+  .alert.alert-info
+    | Сотрудников не найдено

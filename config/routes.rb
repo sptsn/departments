@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get :new_parent
     post :update_parent
   end
-  resources :reports, only: :index
+  resources :reports, only: :index do
+    get :employees, on: :collection
+  end
   resources :employments
 end

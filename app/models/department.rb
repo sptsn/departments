@@ -32,13 +32,19 @@ class Department < ApplicationRecord
 
   def self.treeview(nodes: actual_roots, date: Date.today)
     nodes.map do |node|
+      name = node.is_a?(Department) ? node.actual_name(date) : node.department.actual_name(date)
+      employees_count = Employment.where(department_id: node.department_id).where('start_date <= ?', date).where('end_date >= ?', date).count
       {
-        text: node.is_a?(Department) ? node.actual_name(date) : node.department.actual_name(date),
+        text: name,
         nodes: treeview(
           nodes: DepartmentVersion.actual_at(date).where(ancestry: node.department_id.to_s).select { |v| v.department.versions.actual_at(date).where.not(ancestry: nil).max_by(&:active_since) == v},
           date: date
         ),
-        href: 'https://google.com'
+        tags: ["#{employees_count} сотрудников"],
+        data: {
+          department_id: node.department_id
+        }
+
         # nodes: treeview(nodes: version&.children || [], date: date)
       }.reject { |_k, v| v.blank? }
     end
