@@ -8,7 +8,8 @@ class ReportsController < ApplicationController
   end
 
   def employees
-    @employments = Employment.where(department_id: params[:department_id]).where('start_date <= ?', params[:date]).where('end_date >= ?', params[:date])
+    @department = Department.find(params[:department_id])
+    @employments = Employment.where(department: @department).where('start_date <= ?', params[:date]).where('end_date >= ?', params[:date])
 
     render partial: 'reports/shared/employees_table'
   end

@@ -17,6 +17,10 @@ link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.cs
 - if @departments.present?
   .row
     .col-md-6
+      .panel
+        .panel-heading
+          h5
+            | Список отделов
       div#tree data-nodes=@treeview.to_json
     .col-md-6
       div#employeesTable
