@@ -5,3 +5,8 @@ ru:
         first_name: Имя
         middle_name: Отчество
         last_name: Фамилия
+      employment:
+        employee_id: Сотрудник
+        department_id: Отдел
+        start_date: Начало работы
+        end_date: Конец работы

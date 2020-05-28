@@ -15,8 +15,8 @@
     tbody
       - departments_collection.each do |department|
         tr
-          td = department.actual_version.name
-          td = department.actual_version.parent&.name
+          td = department.actual_name
+          td = department.actual_parent&.actual_name
           td = department.formed_at
           td = department.disbanded_at
           td.text-right

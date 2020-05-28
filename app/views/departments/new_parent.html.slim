@@ -5,6 +5,9 @@
         = "Перенос отдела #{@department.actual_version.name}"
 .row
   .col-md-6
+    - if @version.present? && @version.errors.any?
+      .alert.alert-danger
+        = @version.errors.full_messages
     = simple_form_for :version, as: :version, url: department_update_parent_path(@department) do |f|
       = f.input :department_id, collection: departments_collection.reject{ |d| d == @department }.map { |d| [d.actual_version.name, d.id] }, label: 'Новый родительский отдел', include_blank: false
       = f.input :active_since, as: :string, input_html: { class: 'datepicker' }, label: 'Дата, с которой осуществляется перенос'

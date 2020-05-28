@@ -43,7 +43,7 @@ class DepartmentsController < ApplicationController
     @version = @department.versions.find_or_initialize_by(active_since: params[:version][:active_since])
     @version.name = params[:version][:name]
 
-    if @version.save!
+    if @version.save
       redirect_to departments_path
     else
       render :new_name
@@ -60,7 +60,7 @@ class DepartmentsController < ApplicationController
     @version = @department.versions.find_or_initialize_by(active_since: params[:version][:active_since])
     @version.ancestry = params[:version][:department_id]
 
-    if @version.save!
+    if @version.save
       redirect_to departments_path
     else
       render :new_parent

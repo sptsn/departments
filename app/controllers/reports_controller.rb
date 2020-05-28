@@ -3,13 +3,13 @@ class ReportsController < ApplicationController
     if params[:filter].present?
       @departments = Department.all
       date = params[:filter][:date].to_date
-      @treeview = Department.treeview(nodes: Department.actual_roots(date), date: date)
+      @treeview = Department.treeview(Department.actual_roots(date), date)
     end
   end
 
   def employees
     @department = Department.find(params[:department_id])
-    @employments = Employment.where(department: @department).where('start_date <= ?', params[:date]).where('end_date >= ?', params[:date])
+    @employments = Employment.actual_employees_for_department(params[:department_id], params[:date])
 
     render partial: 'reports/shared/employees_table'
   end
